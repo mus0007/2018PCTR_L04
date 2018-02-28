@@ -11,4 +11,8 @@ public class HiloMovimientoBola extends Thread {
 	public void run() {
 		
 	}
+	
+	public void finalize() {
+		
+	}
 }
