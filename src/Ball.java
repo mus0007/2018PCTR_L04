@@ -15,8 +15,8 @@ public class Ball{
 		image = ii.getImage();
 		
 		//TODO Depend of image size
-		IMG_TAM_X = 32;
-		IMG_TAM_Y = 32;
+		IMG_TAM_X = image.getWidth(null);
+		IMG_TAM_Y = image.getHeight(null);
 
 		
 		x = Billiards.Width/4-16;
@@ -25,7 +25,7 @@ public class Ball{
 		fi =  Math.random() * Math.PI * 2;
 	}
 
-	public void move() {
+	public synchronized void move() {
 		v = v*Math.exp(-v/1000);
 		dx = v*Math.cos(fi);
 		dy = v*Math.sin(fi);
@@ -39,20 +39,22 @@ public class Ball{
 		reflect();
 		
 		//TODO Check postcondition
+		//assert x<Billiards.Width/4-16:"X fuera del tablero";
+		//assert y<Billiards.Height/2-16:"Y fuera del tablero";
 	}
 
 	private void reflect() {
 		if (Math.abs(x + IMG_TAM_X - Board.RIGHTBOARD) <  Math.abs(dx)) {
-			fi = Math.PI - fi;
+			synchronized (this) {fi = Math.PI - fi;}
 		}
 		if (Math.abs(y + IMG_TAM_Y - Board.BOTTOMBOARD) <  Math.abs(dy)) {
-			fi = - fi;
+			synchronized (this) {fi = - fi;}
 		}
 		if (Math.abs(x - Board.LEFTBOARD) <  Math.abs(dx)) {
-			fi = Math.PI - fi;
+			synchronized (this) {fi = Math.PI - fi;}
 		}
 		if (Math.abs(y - Board.TOPBOARD) <  Math.abs(dy)) {
-			fi = - fi;
+			synchronized (this) {fi = - fi;}
 		}
 	}
 

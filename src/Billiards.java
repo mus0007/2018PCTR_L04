@@ -48,7 +48,7 @@ public class Billiards extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(Width, Height);
 		setLocationRelativeTo(null);
-		setTitle("Pr√°ctica programaci√≥n concurrente objetos m√≥viles independientes");
+		setTitle("Pr·ctica programaciÛn concurrente objetos mÛviles independientes");
 		setResizable(false);
 		setVisible(true);
 	}
@@ -57,17 +57,18 @@ public class Billiards extends JFrame {
 		// TODO init balls
 		balls = new Ball[N_BALL];
 		hilosballs = new HiloMovimientoBola[N_BALL];
-		for(int i=0;i<balls.length;++i) {
+		for (int i = 0; i < balls.length; ++i) {
 			balls[i] = new Ball();
 			hilosballs[i] = new HiloMovimientoBola(balls[i]);
 		}
+		board.setBalls(balls);
 	}
 
 	private class StartListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
 			// TODO Code is executed when start button is pushed
-			for(int i=0;i<hilosballs.length;++i) {
+			for (int i = 0; i < hilosballs.length; ++i) {
 				hilosballs[i].start();
 			}
 		}
@@ -77,10 +78,9 @@ public class Billiards extends JFrame {
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
 			// TODO Code is executed when stop button is pushed
-			for(int i=0;i<hilosballs.length;++i) {
+			for (int i = 0; i < hilosballs.length; ++i) {
 				hilosballs[i].finalize();
 			}
-
 		}
 	}
 
