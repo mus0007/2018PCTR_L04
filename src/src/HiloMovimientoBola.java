@@ -1,34 +1,30 @@
 package src;
 
-import java.awt.Graphics;
-
-public class HiloMovimientoBola extends Thread{
+public class HiloMovimientoBola extends Thread {
 	private Ball bola;
 	private Board board;
 
 	public HiloMovimientoBola() {
 		// TODO Auto-generated constructor stub
 	}
+
 	public HiloMovimientoBola(Ball bola, Board board) {
 		this.bola = bola;
 		this.board = board;
 	}
-	
+
 	public void run() {
-		for(;;) {
-			try {
+		try {
+			while (!Thread.currentThread().isInterrupted()) {
 				bola.move();
-				//pintar
-				board.paint();
-				Thread.sleep(1000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				board.repaint();
+				Thread.sleep(10);
 			}
+		} catch (InterruptedException e) {
 		}
 	}
-	
+
 	public void finalize() {
-		Thread.interrupted();
+		interrupt();
 	}
 }

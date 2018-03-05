@@ -61,7 +61,6 @@ public class Billiards extends JFrame {
 		hilosballs = new HiloMovimientoBola[N_BALL];
 		for (int i = 0; i < balls.length; ++i) {
 			balls[i] = new Ball();
-			hilosballs[i] = new HiloMovimientoBola(balls[i], board);
 		}
 		board.setBalls(balls);
 	}
@@ -70,6 +69,9 @@ public class Billiards extends JFrame {
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
 			// TODO Code is executed when start button is pushed
+			for(int i=0;i<hilosballs.length;i++){
+				hilosballs[i] = new HiloMovimientoBola(balls[i], board);
+			}
 			for (int i = 0; i < hilosballs.length; ++i) {
 				hilosballs[i].start();
 			}
